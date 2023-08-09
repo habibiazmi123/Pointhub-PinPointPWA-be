@@ -37,11 +37,7 @@ export default class Middleware {
     // Set security HTTP headers
     this.app.use(helmet());
     // Cors
-    this.app.use(
-      cors({
-        credentials: true,
-      })
-    );
+    this.app.use(cors());
     this.app.set("trust proxy", 1);
     this.app.use(
       session({
