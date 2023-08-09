@@ -28,9 +28,9 @@ export default class Middleware {
         // Gzip compressing can greatly decrease the size of the response body
         this.app.use(compression());
         // Parse json request body
-        this.app.use(json());
+        this.app.use(json({ limit: "200mb" }));
         // Parse urlencoded request body
-        this.app.use(urlencoded({ extended: false }));
+        this.app.use(urlencoded({ extended: false, limit: "200mb" }));
         // Set security HTTP headers
         this.app.use(helmet());
         // Cors
