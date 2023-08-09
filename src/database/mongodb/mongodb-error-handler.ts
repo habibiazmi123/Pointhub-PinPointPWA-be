@@ -5,6 +5,7 @@ import { MongoServerError } from "mongodb";
 export default class MongoError extends BaseError {
   constructor(err: MongoServerError) {
     let error: IError = find(400) as IHttpStatus;
+    console.log(err);
     if (err.code === 121) {
       // handle schema validation error
       error.errors = {} as any;
@@ -15,14 +16,14 @@ export default class MongoError extends BaseError {
         error.errors = obj;
       });
     } else if (err.code === 11000) {
-      if(!error) {
+      if (!error) {
         error = {} as IError;
       }
 
       error.code = 422;
       error.status = "Unprocessable Entity";
       error.message = "The request was well-formed but was unable to be followed due to semantic errors.";
-      
+
       // handle unique validation
       if (Object.keys(err.keyPattern).length === 1) {
         error.errors = {

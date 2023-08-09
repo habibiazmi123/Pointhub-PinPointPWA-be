@@ -28,15 +28,13 @@ export default class Middleware {
         // Gzip compressing can greatly decrease the size of the response body
         this.app.use(compression());
         // Parse json request body
-        this.app.use(json());
+        this.app.use(json({ limit: "200mb" }));
         // Parse urlencoded request body
-        this.app.use(urlencoded({ extended: false }));
+        this.app.use(urlencoded({ extended: false, limit: "200mb" }));
         // Set security HTTP headers
         this.app.use(helmet());
         // Cors
         this.app.use(cors({
-            origin: ["http://localhost:8080", "http://localhost:5173", "https://pointhub-pin-point-pwa-fe.vercel.app"],
-            methods: "GET,POST,PUT,DELETE",
             credentials: true,
         }));
         this.app.set("trust proxy", 1);

@@ -3,6 +3,7 @@ import { BaseError, find } from "@point-hub/express-error-handler";
 export default class MongoError extends BaseError {
     constructor(err) {
         let error = find(400);
+        console.log(err);
         if (err.code === 121) {
             // handle schema validation error
             error.errors = {};
