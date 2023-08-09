@@ -40,7 +40,7 @@ export default class Middleware {
     this.app.use(
       cors({
         origin: ["http://localhost:8080", "http://localhost:5173", "https://pointhub-pin-point-pwa-fe.vercel.app"],
-        methods: "GET,POST,PUT,DELETE",
+        methods: "GET,POST,PUT,DELETE,PATCH",
         credentials: true,
       })
     );
