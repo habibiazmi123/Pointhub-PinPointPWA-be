@@ -31,13 +31,19 @@ export default class Middleware {
     // Gzip compressing can greatly decrease the size of the response body
     this.app.use(compression());
     // Parse json request body
-    this.app.use(json({ limit: "200mb" }));
+    this.app.use(json());
     // Parse urlencoded request body
-    this.app.use(urlencoded({ extended: false, limit: "200mb" }));
+    this.app.use(urlencoded({ extended: false }));
     // Set security HTTP headers
     this.app.use(helmet());
     // Cors
-    this.app.use(cors());
+    this.app.use(
+      cors({
+        origin: ["*"],
+        methods: "GET,POST,PUT,DELETE",
+        credentials: true,
+      })
+    );
     this.app.set("trust proxy", 1);
     this.app.use(
       session({
