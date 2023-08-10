@@ -4,7 +4,7 @@ import Validatorjs from "validatorjs";
 export const validate = (document) => {
     try {
         const validation = new Validatorjs(document, {
-            location: "required",
+            location: "required|array",
             photo: "required",
         });
         if (validation.fails()) {

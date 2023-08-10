@@ -6,7 +6,7 @@ import { DocumentInterface } from "@src/database/connection.js";
 export const validate = (document: DocumentInterface) => {
   try {
     const validation = new Validatorjs(document, {
-      location: "required",
+      location: "required|array",
       photo: "required",
     });
 
