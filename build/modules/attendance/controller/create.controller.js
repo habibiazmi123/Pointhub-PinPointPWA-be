@@ -4,6 +4,9 @@ export const createController = async (req, res, next) => {
     try {
         const session = db.startSession();
         db.startTransaction();
+        if (req.file) {
+            req.body.photo = req.file.location;
+        }
         const createAttendanceUseCase = new CreateAttendanceUseCase(db);
         const result = await createAttendanceUseCase.handle(req.body, { session });
         await db.commitTransaction();

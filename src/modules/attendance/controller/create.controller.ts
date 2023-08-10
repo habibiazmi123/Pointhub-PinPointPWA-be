@@ -12,6 +12,10 @@ export const createController = async (req: Request, res: Response, next: NextFu
 
     db.startTransaction();
 
+    if (req.file) {
+      req.body.photo = (req.file as Express.MulterS3.File).location;
+    }
+
     const createAttendanceUseCase = new CreateAttendanceUseCase(db);
     const result = await createAttendanceUseCase.handle(req.body, { session });
 
